@@ -1,5 +1,23 @@
-# Byte-compiled / optimized / DLL files
+
+# Created by https://www.toptal.com/developers/gitignore/api/django,virtualenv,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=django,virtualenv,visualstudiocode
+
+### Django ###
+*.log
+*.pot
+*.pyc
 __pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
+# in your Git repository. Update and uncomment the following line accordingly.
+# <django-project-name>/staticfiles/
+
+### Django.Python Stack ###
+# Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
 
@@ -53,13 +71,8 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -91,8 +104,12 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# celery beat schedule file
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
 celerybeat-schedule
+celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
@@ -123,3 +140,32 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pytype static type analyzer
+.pytype/
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.toptal.com/developers/gitignore/api/django,virtualenv,visualstudiocode

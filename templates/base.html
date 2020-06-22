@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include 'includes/_head.html' %}
+
+<body id="top">
+
+
+
+    {% include 'includes/_header.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'includes/_footer.html' %}
+
+    {% include 'includes/_scripts.html' %}
+
+</body>
+
+</html>
