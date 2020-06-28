@@ -1,5 +1,7 @@
 <!-- Footer -->
+{% load solo_tags %}
+{% get_solo 'SiteConfiguration.SiteConfiguration' as site_config %}
 <footer id="main-footer" class="py-4 bg-primary text-white text-center">
     Copyright &copy;
-    <span class="year"></span> BT Real Estate
+    <span class="year"></span> {{ site_config.site_name }}
 </footer>

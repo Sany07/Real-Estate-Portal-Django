@@ -18,7 +18,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">
+                <a href="{% url 'listing:home' %}">
                 <i class="fas fa-home"></i> Home</a>
             </li>
             <li class="breadcrumb-item active"> About</li>
@@ -40,12 +40,11 @@
             </div>
             <div class="col-md-4">
             <div class="card">
-                <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month">
+                <img class="card-img-top" src="{{ mvp.realtor.photo.url }}" alt="Seller of the month">
                 <div class="card-body">
                 <h5 class="card-title">Seller Of The Month</h5>
-                <h6 class="text-secondary">Kyle Brown</h6>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nesciunt amet, illo itaque similique repellat.
-                    content.
+                <h6 class="text-secondary">{{ mvp.realtor.name }}</h6>
+                <p class="card-text">{{ mvp.realtor.description }}
                 </p>
                 </div>
             </div>
@@ -67,39 +66,21 @@
         <div class="container">
         <h2 class="text-center">Our Team</h2>
         <div class="row text-center">
-            <div class="col-md-4">
-            <img src="assets/img/realtors/kyle.jpg" alt="" class="rounded-circle mb-3">
-            <h4>Kyle Brown</h4>
-            <p class="text-success">
-                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
-            <hr>
-            <p>
-                <i class="fas fa-phone"></i> (555)-555-5555</p>
-            <p>
-                <i class="fas fa-envelope-open"></i> kyle@btrealestate.co</p>
-            </div>
 
-            <div class="col-md-4">
-            <img src="assets/img/realtors/mark.jpg" alt="" class="rounded-circle mb-3">
-            <h4>Mark Hudson</h4>
-            <p class="text-success">Realtor</p>
-            <hr>
-            <p>
-                <i class="fas fa-phone"></i> (444)-444-4444</p>
-            <p>
-                <i class="fas fa-envelope-open"></i> mark@btrealestate.co</p>
-            </div>
+            {% for team in realtors %}
+                <div class="col-md-4">
+                <img src="{{ team.photo.url }}" alt="" class="rounded-circle mb-3">
+                <h4>Kyle Brown</h4>
+                <p class="text-success">
+                    <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+                <hr>
+                <p>
+                    <i class="fas fa-phone"></i> {{ team.phone }}</p>
+                <p>
+                    <i class="fas fa-envelope-open"></i> {{ team.email }}</p>
+                </div>
+            {% endfor %}
 
-            <div class="col-md-4">
-            <img src="assets/img/realtors/jenny.jpg" alt="" class="rounded-circle mb-3">
-            <h4>Jenny Johnson</h4>
-            <p class="text-success">Realtor</p>
-            <hr>
-            <p>
-                <i class="fas fa-phone"></i> (333)-333-3333</p>
-            <p>
-                <i class="fas fa-envelope-open"></i> jenny@btrealestate.co</p>
-            </div>
         </div>
         </div>
     </section>

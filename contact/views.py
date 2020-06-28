@@ -1,32 +1,39 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.models import User
-# Create your views here.
+from django.contrib import messages
+
 from .models import Contact
 
-
 class ContactView(View):
-    def post(self, request, *args, **kwargs):
-        if self.request.method == 'POST':
-            listing_id = request.POST['listing_id']
-            email = request.POST['email']
-            phone = request.POST['phone']
-            message = request.POST['message']
-            # realtor_email = request.POST['realtor_email']
-
-            #  Check if user has made inquiry already
-            if self.request.user.is_authenticated:
-                id = request.user.id
-                # user_name = get_object_or_404(User, id=id)
-                has_contacted = Contact.objects.filter(listing_id=listing_id, user_name=id)
-                if has_contacted:
-           
-                    return redirect('/listing/'+listing_id)
-
-            contact = Contact(user_name_id=id, listing_id=listing_id, email=email, message=message,  phone=phone )
-            contact.save()
-
-            return redirect('/')
 
     def get(self,request, *args, **kwargs):
         return redirect('/')
+
+
+    def post(self, request, *args, **kwargs):
+        if self.request.method == 'POST':
+            listing_id = request.POST['listing_id']
+            listing = request.POST['listing']
+            name = request.POST['name']
+            email = request.POST['email']
+            phone = request.POST['phone']
+            message = request.POST['message']
+            user_id = request.POST['user_id']
+
+      
+            if self.request.user.is_authenticated:
+                user_id = request.user.id
+                has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id)
+            if has_contacted:
+                messages.error(request, 'You have already made an inquiry for this listing')
+                return redirect('/listing/'+listing_id)
+
+            contact = Contact(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone, message=message, user_id=user_id )
+
+            contact.save()
+
+            messages.success(request, 'Your request has been submitted, a realtor will get back to you soon')
+            return redirect('/listing/'+listing_id)
+
+

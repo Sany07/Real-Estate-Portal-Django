@@ -40,6 +40,16 @@ INSTALLED_APPS = [
     
 
     'listing.apps.ListingConfig',
+    'account.apps.AccountConfig',
+    'contact.apps.ContactConfig',
+    'SiteConfiguration.apps.SiteconfigurationConfig',
+
+    
+
+
+    #3rd Party App
+    'solo.apps.SoloAppConfig'
+    
 ]
 
 MIDDLEWARE = [

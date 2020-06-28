@@ -29,45 +29,45 @@
           <img src="{{ property.thumb_nail.url }}" alt="" class="img-main img-fluid mb-3">
           <!-- Thumbnails -->
           <div class="row mb-5 thumbs">
-            {% if listing.photo_1 %}
+            {% if property.photo_1 %}
             <div class="col-md-2">
               <a href="{{ property.photo_1.url }}" data-lightbox="home-images">
                 <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
-            {% if listing.photo_2 %}
+            {% if property.photo_2 %}
             <div class="col-md-2">
               <a href="{{ property.photo_2.url }}" data-lightbox="home-images">
-                <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
+                <img src="{{ property.photo_2.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
-            {% if listing.photo_3 %}
+            {% if property.photo_3 %}
             <div class="col-md-2">
               <a href="{{ property.photo_3.url }}" data-lightbox="home-images">
-                <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
+                <img src="{{ property.photo_3.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
-            {% if listing.photo_4 %}
+            {% if property.photo_4 %}
             <div class="col-md-2">
               <a href="{{ property.photo_4.url }}" data-lightbox="home-images">
-                <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
+                <img src="{{ property.photo_4.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
-            {% if listing.photo_5 %}
+            {% if property.photo_5 %}
             <div class="col-md-2">
               <a href="{{ property.photo_5.url }}" data-lightbox="home-images">
-                <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
+                <img src="{{ property.photo_5.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
-            {% if listing.photo_6 %}
+            {% if property.photo_6 %}
             <div class="col-md-2">
               <a href="{{ property.photo_6.url }}" data-lightbox="home-images">
-                <img src="{{ property.photo_1.url }}" alt="" class="img-fluid">
+                <img src="{{ property.photo_6.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
@@ -154,30 +154,38 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="property_name" class="col-form-label">Property:</label>
-              <input type="text" name="listing" class="form-control" value="45 Drivewood Cirlce" disabled>
-            </div>
-            <div class="form-group">
-              <label for="name" class="col-form-label">Name:</label>
-              <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="email" class="col-form-label">Email:</label>
-              <input type="email" name="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="phone" class="col-form-label">Phone:</label>
-              <input type="text" name="phone" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="message" class="col-form-label">Message:</label>
-              <textarea name="message" class="form-control"></textarea>
-            </div>
-            <hr>
-            <input type="submit" value="Send" class="btn btn-block btn-secondary">
-          </form>
+          <form action="{% url 'contactapp:contact' %}" method="POST">
+            {% csrf_token %}
+              {% if user.is_authenticated %}
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+              {% else %}
+                <input type="hidden" name="user_id" value="0">
+              {% endif %}
+          
+              <input type="hidden" name="listing_id" value="{{ property.id }}">
+              <div class="form-group">
+                <label for="property_name" class="col-form-label">Property:</label>
+                <input type="text" name="listing" class="form-control" value="{{ property.title }}">
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-form-label">Name:</label>
+                <input type="text" name="name" class="form-control" {% if user.is_authenticated %} value="{{ user.get_full_name }}" {% endif %} required>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-form-label">Email:</label>
+                <input type="email" name="email" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="col-form-label">Phone:</label>
+                <input type="text" name="phone" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message" class="col-form-label">Message:</label>
+                <textarea name="message" class="form-control" required></textarea>
+              </div>
+              <hr>
+              <input type="submit" value="Send" class="btn btn-block btn-secondary">
+            </form>
         </div>
       </div>
     </div>
