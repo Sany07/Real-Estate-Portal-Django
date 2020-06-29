@@ -35,7 +35,7 @@ class PropertyListView(ListView):
     model = Property
     template_name= 'site/listings.html'
     context_object_name = 'listings'
-    paginate_by = 1
+    paginate_by = 10
 
 class PropertyDetailView(DetailView):
     model = Property

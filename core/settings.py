@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'listing.apps.ListingConfig',
     'account.apps.AccountConfig',
     'contact.apps.ContactConfig',
+    'search.apps.SearchConfig',
     'SiteConfiguration.apps.SiteconfigurationConfig',
 
     
