@@ -18,7 +18,7 @@ class SearchView(ListView):
             if keywords:
                 return self.model.objects.filter(description__icontains=keywords)
 
-        # # City
+        # City
         if 'city' in self.request.GET:
             city = self.request.GET['city']
             if city:
@@ -26,20 +26,20 @@ class SearchView(ListView):
 
                 return self.model.objects.filter(city__iexact=city)
 
-        # # State
+        # State
         if 'state' in self.request.GET:
             state = self.request.GET['state']
             if state:
                 return self.model.objects.filter(state__iexact=state)
 
-        # # Bedrooms
+        # Bedrooms
         if 'bedrooms' in self.request.GET:
      
             bedrooms = self.request.GET['bedrooms']
             if bedrooms:
                 return self.model.objects.filter(bedrooms__iexact=bedrooms)
 
-        # # Price
+        # Price
         if 'price' in self.request.GET:
             price = self.request.GET['price']
             if price:

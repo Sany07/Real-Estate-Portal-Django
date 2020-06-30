@@ -1,10 +1,14 @@
 from django.contrib import messages, auth
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, FormView, RedirectView
+from django.views.generic import CreateView, FormView, RedirectView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from .forms import UserRegistrationForm, UserLoginForm
 from django.contrib.auth.models import User
+
+from contact.models import Contact
 # Create your views here.
 
 
@@ -81,3 +85,18 @@ class LogoutView(RedirectView):
         auth.logout(request)
         messages.success(request, 'You are now logged out')
         return super(LogoutView, self).get(request, *args, **kwargs)
+
+
+class DashBoardView(LoginRequiredMixin, ListView):
+    """
+    Provides users the ability to view his contact list
+    """
+    model = Contact
+    template_name = "account/dashboard.html"
+    context_object_name = 'contacts'
+    login_url = '/account/login'
+
+
+    def get_queryset(self):
+        return self.model.objects.order_by('-contact_date').filter(user_id=self.request.user.id)
+
