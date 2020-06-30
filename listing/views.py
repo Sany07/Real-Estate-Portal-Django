@@ -1,10 +1,7 @@
 from django.shortcuts import render
-from django.http import Http404, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import CreateView , DetailView, ListView  , TemplateView
+
 from .models import *
-
-# Create your views here.
-
 
 
 class HomeView(ListView):
@@ -14,22 +11,6 @@ class HomeView(ListView):
 
     def get_queryset(self):
         return self.model.objects.order_by('-list_date').filter(is_published=True)[:3]
-
-
-
-
-def About(request):
-    realtors = Realtor.objects.all()
-    mvp = Mvp.objects.last()
-    
-    context={
-
-        'realtors':realtors,
-        'mvp':mvp
-
-    }
-    return render(request,'site/about.html',context)
-
 
 class PropertyListView(ListView):
     model = Property
@@ -44,4 +25,11 @@ class PropertyDetailView(DetailView):
     pk_url_kwarg = 'id'
 
 
+class AboutView(TemplateView):
+    template_name = 'site/about.html'
 
+    def get_context_data(self, **kwargs):
+         context = super(AboutView, self).get_context_data(**kwargs)
+         context['realtors'] = Realtor.objects.all()
+         context['mvp'] = Mvp.objects.last()
+         return context
