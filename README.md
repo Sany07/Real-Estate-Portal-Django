@@ -1,4 +1,4 @@
 # Property-Listing-Portal
 
 
-comming soon
+Readme coming soon
