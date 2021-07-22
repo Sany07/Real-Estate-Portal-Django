@@ -32,7 +32,7 @@ python manage.py migrate
 ```
 
 ## Collects all static files in your apps
-
+ 
 ```
 python manage.py collectstatic
 ```
